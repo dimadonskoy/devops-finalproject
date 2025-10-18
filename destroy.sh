@@ -1,18 +1,14 @@
 #!/bin/bash
-# destroy.sh - Destroy AWS resources using Terraform
+# destroy.sh - Manually destroy Terraform AWS infrastructure
 
-set -e  # exit on error
+set -e
 
-# Path to your Terraform code
-TERRAFORM_DIR="terraform/aws"
-
-echo "🔹 Changing directory to $TERRAFORM_DIR"
-cd "$TERRAFORM_DIR" || exit 1
+WORKDIR="terraform/aws"
 
 echo "🔹 Initializing Terraform..."
-terraform init
+terraform -chdir="$WORKDIR" init
 
-echo "🔹 Destroying all AWS resources..."
-terraform destroy -auto-approve
+echo "🔹 Destroying AWS resources..."
+terraform -chdir="$WORKDIR" destroy -auto-approve
 
-echo "✅ AWS infrastructure destroyed"
+echo "✅ Terraform destroy complete"
