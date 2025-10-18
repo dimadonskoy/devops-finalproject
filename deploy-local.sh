@@ -10,6 +10,17 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
+# Clean up any existing containers
+echo "🧹 Cleaning up existing containers..."
+docker-compose down -v
+
+# Remove any unused Docker images
+echo "🧹 Cleaning up unused Docker images..."
+docker image rm ollama/ollama:latest || true
+docker image rm crooper/ai-model:latest || true
+docker image rm nginx:alpine || true
+docker image prune -f
+
 # Build and start services
 echo "📦 Building and starting services..."
 docker-compose up -d --build

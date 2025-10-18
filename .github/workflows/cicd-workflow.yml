@@ -3,7 +3,7 @@ name: CI/CD Workflow
 on:
   push:
     branches: [main]
-  workflow_dispatch: # Allow manual run (can be used for destroy)
+  workflow_dispatch:
 
 jobs:
   Test_and_Build:
