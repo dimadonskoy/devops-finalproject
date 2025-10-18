@@ -21,9 +21,13 @@ jobs:
               with:
                   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
                   aws-region: us-east-1
-            - name: Run destroy script
+
+            - name: Destroy AWS Infrastructure
               run: |
-                  chmod +x ./destroy.sh
-                  ./destroy.sh
+                  cd terraform/aws
+                  terraform init
+                  terraform destroy \
+                    -var="public_key=${{ secrets.SSH_PUBLIC_KEY }}" \
+                    -var="private_key_path=~/.ssh/id_rsa" \
+                    -auto-approve
