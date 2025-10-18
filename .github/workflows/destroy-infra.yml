@@ -31,12 +31,8 @@ jobs:
               working-directory: terraform/aws
               run: |
                   echo "🔹 Importing existing resources into Terraform state..."
-                  # Import EC2 instance
-                  terraform import aws_instance.app $(aws ec2 describe-instances --filters "Name=tag:Name,Values=ai-chatbot" --query "Reservations[0].Instances[0].InstanceId" --output text)
-                  # Import Key Pair
-                  terraform import aws_key_pair.app ai-chatbot-key || echo "Key pair already imported"
-                  # Import Security Group if needed
-                  # terraform import aws_security_group.app <SECURITY_GROUP_ID>
+                  terraform import -var="public_key=$(cat ~/.ssh/id_rsa.pub)" aws_instance.app $(aws ec2 describe-instances --filters "Name=tag:Name,Values=ai-chatbot" --query "Reservations[0].Instances[0].InstanceId" --output text)
+                  terraform import -var="public_key=$(cat ~/.ssh/id_rsa.pub)" aws_key_pair.app ai-chatbot-key || echo "Key pair already imported"
 
             - name: Terraform Destroy
               working-directory: terraform/aws
