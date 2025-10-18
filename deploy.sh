@@ -1,13 +1,22 @@
 #!/bin/bash
-# deploy.sh - deploy using docker-compose
+# deploy.sh - Deploy Docker Compose app to EC2
 
-cd /opt/ai-chatbot || exit 1
+set -e  # exit on error
 
-# stop old containers
-docker-compose down || true
+APP_DIR="/opt/ai-chatbot"
 
-# pull latest images
-docker-compose pull
+echo "🔹 Creating app directory if it doesn't exist..."
+sudo mkdir -p "$APP_DIR"
+sudo chown ubuntu:ubuntu "$APP_DIR"
 
-# start containers in detached mode
-docker-compose up -d
+echo "🔹 Copying app files..."
+# Assuming you have already scp'ed files to /tmp/app.tar.gz
+sudo tar -xzf /tmp/app.tar.gz -C "$APP_DIR" --strip-components=0
+
+echo "🔹 Deploying Docker Compose..."
+cd "$APP_DIR"
+docker compose pull
+docker compose down || true
+docker compose up -d
+
+echo "✅ Deployment finished"
