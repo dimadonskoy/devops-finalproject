@@ -1,0 +1,36 @@
+name: AI local model CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+    name: Deploy to Azure VM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Apply Terraform configuration
+        run: terraform apply -auto-approve
+
+      - name: Get VM IP Address
+        id: get_ip
+        run: |
+          VM_IP=$(terraform output -raw vm_ip_address)
+          echo "VM_IP=$VM_IP" >> $GITHUB_ENV
+
+      - name: Deploy application to Azure VM
+        run: |
+          ssh -o StrictHostKeyChecking=no user@$VM_IP 'bash -s' < ./deploy-on-cloud.sh

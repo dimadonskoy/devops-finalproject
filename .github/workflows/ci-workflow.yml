@@ -1,4 +1,4 @@
-name: AI local model CI/CD Pipeline
+name: AI local model CI Pipeline
 
 on:
   push:
