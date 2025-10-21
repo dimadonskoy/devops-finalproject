@@ -9,3 +9,4 @@
 7. Terraform deploy
 8. add job deploy in workflow + output of created vm (IP)
 9. add deploy-on-cloud script for provisioning with azure terraform workflow
+10. workflow.cd
