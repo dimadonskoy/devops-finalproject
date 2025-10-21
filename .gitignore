@@ -1,0 +1,10 @@
+#Files
+.env
+
+#Directories
+.git/
+venv/
+__pycache__/
+.venv/
+.terraform/
+ollama_data/
