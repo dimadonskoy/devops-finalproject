@@ -1,0 +1,5 @@
+package_update: true
+package_upgrade: true
+runcmd:
+  - ["sh", "/var/lib/cloud/instance/scripts/init.sh" ]
+  - ["sh", "/var/lib/cloud/instance/scripts/deploy-on-cloud.sh" ]

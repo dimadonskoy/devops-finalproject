@@ -1,0 +1,36 @@
+#Files
+.env
+
+#Directories
+.git/
+venv/
+__pycache__/
+.venv/
+.terraform/
+ollama_data/
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+
+# Local env
+.env
+.env.*
+secrets.*
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars*
+.env*
+secrets.*
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars*
+.env*
+secrets.*
