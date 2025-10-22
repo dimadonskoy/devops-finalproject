@@ -39,3 +39,4 @@ jobs:
       - name: Note
         run: |
           echo "Cloud-init will run deploy-on-cloud.sh on the VM at first boot. No SSH deploy step is executed from this workflow."
+test
