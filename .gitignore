@@ -53,3 +53,9 @@ terraform.tfvars.json
 *.tf.json
 *.auto.tfvars
 *.auto.tfvars.json
+# Certificates / keys
+*.crt
+*.pem
+*.key
+certs/
+ssl/
