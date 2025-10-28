@@ -23,7 +23,6 @@ data "cloudinit_config" "config" {
       open_webui_user = var.open_webui_user,
       open_webui_password = random_password.password.result,
       openai_base = var.openai_base,
-      openai_key = var.openai_key,
       gpu_enabled = var.gpu_enabled,
     }) 
   }
