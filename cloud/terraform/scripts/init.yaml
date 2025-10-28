@@ -1,5 +1,17 @@
+#cloud-config
 package_update: true
 package_upgrade: true
+
+packages:
+- bash
+- git
+- curl
+- wget
+- ca-certificates
+- gnupg
+- lsb-release
+
 runcmd:
-- [ "sh", "/var/lib/cloud/instance/scripts/init.sh" ]
-- [ "sh", "/var/lib/cloud/instance/scripts/provision_script.sh" ]
+- echo "Starting deployment..." > /var/log/cloud-init-deployment.log
+- [ "/bin/bash", "-lc", "if [ -f /var/lib/cloud/instance/scripts/provision_script.sh ]; then chown root:root /var/lib/cloud/instance/scripts/provision_script.sh && chmod 0777 /var/lib/cloud/instance/scripts/provision_script.sh; fi" ]
+- [ "/bin/bash", "-lc", "DEBIAN_FRONTEND=noninteractive sudo /bin/bash /var/lib/cloud/instance/scripts/provision_script.sh >> /var/log/cloud-init-deployment.log 2>&1" ]
