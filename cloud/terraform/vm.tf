@@ -18,7 +18,7 @@ data "cloudinit_config" "config" {
     filename     = "init.sh"
     content_type = "text/x-shellscript"
 
-    content = templatefile("${path.module}/scripts/provision_vars.sh",
+    content = templatefile("${path.module}/scripts/provision_script.sh",
     {
       open_webui_user = var.open_webui_user,
       open_webui_password = random_password.password.result,
