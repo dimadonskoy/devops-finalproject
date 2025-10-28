@@ -4,7 +4,7 @@
 
 LOGFILE="/var/log/deploy-on-cloud.log"
 exec > >(tee -a "$LOGFILE") 2>&1
-d
+
 echo "Starting Local AI Chatbot deployment..."
 
 # Export DEBIAN_FRONTEND for non-interactive apt operations
