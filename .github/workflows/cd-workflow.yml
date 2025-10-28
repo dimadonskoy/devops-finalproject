@@ -3,12 +3,15 @@ name: AI local model CD Pipeline
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write # ✅ Needed for OIDC authentication
+  contents: read # ✅ Required to checkout the repo
+
 jobs:
   Deploy:
     name: Deploy to Azure VM
     runs-on: ubuntu-latest
     env:
-      # Set the working directory for all Terraform commands
       TF_WORKING_DIR: cloud/terraform
 
     steps:
@@ -20,20 +23,18 @@ jobs:
         with:
           terraform_version: 1.5.7
 
-      - name: Login to Azure
+      - name: Login to Azure using OIDC
         uses: azure/login@v1
         with:
-          # Use the individual service principal credentials stored as secrets
+          auth-type: oidc
           client-id: ${{ secrets.TF_VAR_CLIENT_ID }}
           tenant-id: ${{ secrets.TF_VAR_TENANT_ID }}
           subscription-id: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
-          client-secret: ${{ secrets.TF_VAR_CLIENT_SECRET }}
 
       - name: Initialize Terraform
         run: terraform -chdir=${{ env.TF_WORKING_DIR }} init
 
       - name: Apply Terraform configuration
-        id: terraform_apply
         run: |
           terraform -chdir=${{ env.TF_WORKING_DIR }} apply \
             -var="openai_key=${{ secrets.OPENAI_KEY }}" \
