@@ -38,7 +38,7 @@ data "cloudinit_config" "config" {
     content_type = "text/x-shellscript"
 
     # Use path.root to reference the repo root where provision_script.sh lives
-    content = file("${path.root}/provision_script.sh")
+    content = file("${path.root}/scripts/provision_script.sh")
   }
 }
 
