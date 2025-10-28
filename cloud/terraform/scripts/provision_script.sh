@@ -25,42 +25,12 @@ REPO_BRANCH="clean-main"
 
 CLOUD_SCRIPTS_DIR="/var/lib/cloud/instance/scripts"
 
-# If cloud-init provided repo files, copy them into REPO_DIR
-if [ -d "$CLOUD_SCRIPTS_DIR" ] && [ -f "$CLOUD_SCRIPTS_DIR/docker-compose.yml" ]; then
-    echo "Found bundled repo files from cloud-init, copying into $REPO_DIR"
-    run_sudo mkdir -p "$REPO_DIR"
-    run_sudo cp -a "$CLOUD_SCRIPTS_DIR/docker-compose.yml" "$REPO_DIR/docker-compose.yml"
-    # copy optional files if present
-    for f in Dockerfile nginx.conf requirements.txt app.py templates_index.html selfsigned.crt selfsigned.key; do
-        if [ -f "$CLOUD_SCRIPTS_DIR/$f" ]; then
-            # templates_index.html should be moved into templates/index.html
-            if [ "$f" = "templates_index.html" ]; then
-                run_sudo mkdir -p "$REPO_DIR/templates"
-                run_sudo cp -a "$CLOUD_SCRIPTS_DIR/$f" "$REPO_DIR/templates/index.html"
-            else
-                run_sudo cp -a "$CLOUD_SCRIPTS_DIR/$f" "$REPO_DIR/$(echo $f | sed 's/_index//')"
-            fi
-        fi
-    done
-    cd "$REPO_DIR"
-    # If repo already has a .git, try to pull updates
-    if [ -d ".git" ]; then
-        run_sudo git config --global --add safe.directory "$REPO_DIR"
-        run_sudo git pull --rebase || true
-    fi
-else
-    if [ -d "$REPO_DIR" ]; then
-        echo "Repository already exists at $REPO_DIR - pulling latest changes"
-        cd "$REPO_DIR"
-        run_sudo git config --global --add safe.directory "$REPO_DIR"
-        run_sudo git pull --rebase || echo "Git pull failed - continuing with existing copy"
-    else
-        echo "Cloning repository into $REPO_DIR"
-        run_sudo git clone -b "$REPO_BRANCH" "$REPO_URL" "$REPO_DIR"
-        cd "$REPO_DIR"
-        run_sudo git config --global --add safe.directory "$REPO_DIR"
-    fi
-fi
+
+echo "Cloning repository into $REPO_DIR"
+run_sudo git clone -b "$REPO_BRANCH" "$REPO_URL" "$REPO_DIR"
+cd "$REPO_DIR"
+run_sudo git config --global --add safe.directory "$REPO_DIR"
+
 
 # Ensure docker is available
 if ! command -v docker >/dev/null 2>&1 || ! run_sudo docker info >/dev/null 2>&1; then
@@ -112,6 +82,7 @@ fi
 
 echo "Building and starting services (docker-compose)..."
 # Use compose plugin if available, otherwise fall back to docker-compose binary
+cd "$REPO_DIR"
 if run_sudo docker compose version >/dev/null 2>&1; then
     run_sudo docker compose up -d --build
 else
