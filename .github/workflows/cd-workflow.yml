@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the working directory for all Terraform commands
-      TF_WORKING_DIR: pcloud/terraform
+      TF_WORKING_DIR: cloud/terraform
 
     steps:
       - name: Checkout code
@@ -23,15 +23,10 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} # Use a service principal with contributor role on the resource group
+          creds: ${{ secrets.TF_VAR_client_secret }} # Use a service principal with contributor role on the resource group
 
       - name: Initialize Terraform
         run: terraform -chdir=${{ env.TF_WORKING_DIR }} init
-
-      - name: Plan Terraform changes
-        run: |
-          terraform -chdir=${{ env.TF_WORKING_DIR }} plan \
-            -var="openai_key=${{ secrets.OPENAI_KEY }}"
 
       - name: Apply Terraform configuration
         id: terraform_apply
@@ -39,20 +34,3 @@ jobs:
           terraform -chdir=${{ env.TF_WORKING_DIR }} apply \
             -var="openai_key=${{ secrets.OPENAI_KEY }}" \
             -auto-approve
-
-      - name: Get VM IP Address
-        id: get_ip
-        run: |
-          VM_IP=$(terraform -chdir=${{ env.TF_WORKING_DIR }} output -raw vm_public_ip)
-          echo "VM_IP=$VM_IP" >> $GITHUB_ENV
-
-      - name: Deployment Summary
-        run: |
-          echo "### 🚀 Deployment Successful" >> $GITHUB_STEP_SUMMARY
-          echo "The VM has been provisioned and is being configured via cloud-init." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Public IP:** \`${{ env.VM_IP }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Access Web UI:** http://${{ env.VM_IP }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **SSH Access:** \`ssh openwebui@${{ env.VM_IP }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> **Note:** Please allow a few minutes for the \`deploy-on-cloud.sh\` script to complete the application setup on the VM." >> $GITHUB_STEP_SUMMARY
