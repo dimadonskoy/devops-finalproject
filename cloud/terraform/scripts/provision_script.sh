@@ -1,7 +1,7 @@
 
 #!/usr/bin/env bash
 
-set -euo pipefail
+# set -euo pipefail
 
 LOGFILE="/var/log/deploy-on-cloud.log"
 exec > >(tee -a "$LOGFILE") 2>&1
