@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the working directory for all Terraform commands
-      TF_WORKING_DIR: provider
+      TF_WORKING_DIR: pcloud/terraform
 
     steps:
       - name: Checkout code
