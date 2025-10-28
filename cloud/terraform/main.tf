@@ -11,10 +11,6 @@ variable "openai_base" {
   default     = "https://api.openai.com/v1"
 }
 
-variable "openai_key" {
-  description = "Optional API key to use OpenAI API with Open Web UI"
-  default     = ""
-}
 
 variable "machine" {
   description = "The machine type and image to use for the VM"
