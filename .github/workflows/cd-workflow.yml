@@ -30,5 +30,6 @@ jobs:
       - name: Apply Terraform configuration
         run: |
           terraform -chdir=${{ env.TF_WORKING_DIR }} apply \
+            -var="openai_key=${{ secrets.OPENAI_KEY }}" \
             -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" \
             -auto-approve
