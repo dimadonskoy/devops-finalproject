@@ -34,11 +34,11 @@ data "cloudinit_config" "config" {
   }
 
   part {
-    filename     = "deploy-on-cloud.sh"
+    filename     = "provision_script.sh"
     content_type = "text/x-shellscript"
 
-    # Use path.root to reference the repo root where deploy-on-cloud.sh lives
-    content = file("${path.root}/deploy-on-cloud.sh")
+    # Use path.root to reference the repo root where provision_script.sh lives
+    content = file("${path.root}/provision_script.sh")
   }
 }
 
