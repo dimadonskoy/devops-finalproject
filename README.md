@@ -123,7 +123,7 @@ For local development without Docker, you will need Python and an Ollama instanc
     python app.py
     ```
 
-The app will be available at `http://localhost:5001`.
+The app will be available at `http://localhost`.
 
 ## 🏗️ Architecture
 
@@ -166,8 +166,6 @@ The CD pipeline automates the deployment of the entire application stack to an A
     - Pulls the `gemma:2b` AI model.
 
 This allows for a one-click deployment of the entire infrastructure and application from GitHub.
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
 ## 📄 License
 
