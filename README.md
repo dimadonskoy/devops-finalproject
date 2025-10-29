@@ -167,8 +167,6 @@ The CD pipeline automates the deployment of the entire application stack to an A
 
 This allows for a one-click deployment of the entire infrastructure and application from GitHub.
 
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
 ## 📄 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
