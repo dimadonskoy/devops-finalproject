@@ -1,6 +1,6 @@
 # Local AI Chatbot with Flask and Ollama
 
-A simple, self-hosted chatbot web application that runs on your local machine. Powered by Flask and Ollama, it allows you to chat with powerful open-source AI models without sending your data to the cloud.
+A simple, self-hosted chatbot web application that runs on your local machine or cloud vm instance. Powered by Flask and Ollama, it allows you to chat with powerful open-source AI models without sending your data to the cloud.
 
 ## Features
 
@@ -134,6 +134,38 @@ This project consists of two main services orchestrated by Docker Compose:
 -   `ollama_data`: A named Docker volume that persists the downloaded models on your host machine, preventing re-downloads when the container is recreated.
 
 ## 🤝 Contributing
+## 🔄 CI/CD Workflows
+
+This project uses GitHub Actions for Continuous Integration (CI) and Continuous Deployment (CD).
+
+### CI Pipeline (`ci-workflow.yml`)
+
+The CI pipeline automates testing and image building. It is triggered on every push to the `clean-main` branch.
+
+**Key Steps:**
+1.  **Lint & Format Check**: Runs `flake8` and `black` to ensure Python code quality and consistency.
+2.  **Syntax Check**: Compiles Python files to validate their syntax.
+3.  **Build Docker Image**: Builds the `flask-app` Docker image.
+4.  **Push to Docker Hub**: Pushes the newly built image to Docker Hub, making it available for deployment.
+
+### CD Pipeline (`cd-workflow.yml`) - Manual run !
+
+The CD pipeline automates the deployment of the entire application stack to an Azure Virtual Machine. This workflow is triggered manually via `workflow_dispatch`.
+
+**Key Steps:**
+1.  **Login to Azure**: Authenticates with Azure using a Service Principal.
+2.  **Setup Terraform**: Initializes the Terraform environment.
+3.  **Terraform Apply**: Executes `terraform apply` to provision or update the following Azure resources:
+    - A Virtual Machine to host the application.
+    - Networking components (VNet, Subnet, Public IP).
+    - A Network Security Group to manage traffic.
+4.  **Provision VM**: Terraform uses `cloud-init` to run a script on the VM that:
+    - Clones the project repository.
+    - Installs Docker.
+    - Starts the application using `docker-compose`.
+    - Pulls the `gemma:2b` AI model.
+
+This allows for a one-click deployment of the entire infrastructure and application from GitHub.
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
@@ -144,4 +176,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## 👨‍💻 Author
 
 **Dmitri and Yair **  
-
