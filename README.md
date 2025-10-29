@@ -2,8 +2,6 @@
 
 A simple, self-hosted chatbot web application that runs on your local machine. Powered by Flask and Ollama, it allows you to chat with powerful open-source AI models without sending your data to the cloud.
 
-![Screenshot of the chat application interface](https://user-images.githubusercontent.com/10670166/232827049-3a2df046-f649-493b-8a90-37f1235169e0.png)
-
 ## Features
 
 - 💬 **Simple Web Interface**: A clean, modern, and responsive chat interface.
