@@ -1,6 +1,14 @@
-#!/bin/env bash
-
-set -e
+#!/usr/bin/env bash
+#######################################################################
+#Developed by : Dmitri & Yair
+#Purpose : Deploy Local AI Chatbot (Ollama model gemma:2b)
+#Date : 29.10.2025
+#Version : 0.0.1
+# set -x
+set -o errexit
+set -o nounset
+set -o pipefail
+#######################################################################
 
 echo "🚀 Starting Local AI Chatbot deployment..."
 

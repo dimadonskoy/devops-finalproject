@@ -1,6 +1,14 @@
-#!/bin/bash
-
-# set -euo pipefail
+#!/usr/bin/env bash
+#######################################################################################
+#Developed by : Dmitri & Yair
+#Purpose : Deploy Local AI Chatbot (Ollama model gemma:2b) on Azure VM using terraform
+#Date : 29.10.2025
+#Version : 0.0.1
+# set -x
+set -o errexit
+set -o nounset
+set -o pipefail
+#######################################################################################
 
 LOGFILE="/var/log/deploy-on-cloud.log"
 exec > >(tee -a "$LOGFILE") 2>&1
