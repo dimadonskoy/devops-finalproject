@@ -184,4 +184,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## 👨‍💻 Author
 
-**Dmitri and Yair **  
+**Dmitri Donskoy & Yair Kochavi**  
