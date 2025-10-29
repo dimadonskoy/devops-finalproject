@@ -1,3 +1,14 @@
+[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com/)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com/)
+[![Docker](https://img.shields.io/badge/Docker-384000?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Azure](https://img.shields.io/badge/Azure-0078D7?style=for-the-badge&logo=Azure&logoColor=white)](https://azure.microsoft.com/en-us/)
+[![Terraform](https://img.shields.io/badge/Terraform-000000?style=for-the-badge&logo=Terraform&logoColor=white)](https://www.terraform.io/)
+
+
+
 # Local AI Chatbot with Flask and Ollama
 
 A simple, self-hosted chatbot web application that runs on your local machine or cloud vm instance. Powered by Flask and Ollama, it allows you to chat with powerful open-source AI models without sending your data to the cloud.
@@ -123,7 +134,7 @@ For local development without Docker, you will need Python and an Ollama instanc
     python app.py
     ```
 
-The app will be available at `http://localhost:5001`.
+The app will be available at `http://localhost`.
 
 ## 🏗️ Architecture
 
@@ -173,4 +184,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## 👨‍💻 Author
 
-**Dmitri and Yair **  
+**Dmitri Donskoy & Yair Kochavi**  
