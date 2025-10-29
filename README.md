@@ -6,7 +6,7 @@
 [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=Ollama&logoColor=white)](https://ollama.ai/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/dimadonskoy/devops-finalproject)
-[![Azure] (https://img.shields.io/badge/Azure-0078D7?style=for-the-badge&logo=Azure&logoColor=white)](https://azure.microsoft.com/en-us/)
+[![Azure](https://img.shields.io/badge/Azure-0078D7?style=for-the-badge&logo=Azure&logoColor=white)](https://azure.microsoft.com/en-us/)
 [![Terraform](https://img.shields.io/badge/Terraform-000000?style=for-the-badge&logo=Terraform&logoColor=white)](https://www.terraform.io/)
 
 
