@@ -36,3 +36,4 @@ jobs:
 
       - name: Show Terraform outputs
         run: terraform -chdir=${{ env.TF_WORKING_DIR }} output
+######################################################################
