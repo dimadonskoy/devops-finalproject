@@ -50,11 +50,9 @@ A simple, self-hosted chatbot web application that runs on your local machine or
 3.  **Access the Chatbot**
 
     Once the script is finished, open your web browser and navigate to:
-<<<<<<< HEAD
-    - **Chat Interface**: http://localhost:5001
-=======
+
     - **Chat Interface**: https://localhost
->>>>>>> clean-main
+
 
 ## Configuration
 
