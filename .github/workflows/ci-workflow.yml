@@ -2,7 +2,7 @@ name: AI local model CI Pipeline
 
 on:
   push:
-    branches: [clean-main]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
