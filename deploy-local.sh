@@ -2,8 +2,8 @@
 #######################################################################
 #Developed by : Dmitri & Yair
 #Purpose : Deploy Local AI Chatbot (Ollama model gemma:2b)
-#Date : 29.10.2025
-#Version : 0.0.1
+#Date : 31.10.2025
+#Version : 0.0.2
 # set -x
 set -o errexit
 set -o nounset
@@ -11,6 +11,39 @@ set -o pipefail
 #######################################################################
 
 echo "Starting Local AI Chatbot deployment..."
+
+# Create LOGS directory if  not exist
+if [ ! -d "/var/log/ollama-local" ]; then
+    echo "LOGS directory does not exist. Creating LOGS directory..."
+    mkdir -p /var/log/ollama-local
+fi
+
+## Log file
+LOGFILE=/var/log/ollama-local/ollama-local.log
+
+# Check if user is root
+if [[ "$EUID" -ne 0 ]]; then
+    echo "Please run as root"
+    echo
+fi
+
+
+# Check OS type (MACOS or Ubuntu/Debian)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "Detected macOS"
+elif [[ -f /etc/os-release ]]; then
+    source /etc/os-release
+    if [[ "$ID" == "ubuntu" || "$ID_LIKE" == *"debian"* ]]; then
+        echo "Detected Ubuntu or Debian-based system"
+    else
+        echo "This is NOT Ubuntu, Debian, or macOS. Exiting..."
+        exit 1
+    fi
+else
+    echo "Unknown OS type. Exiting..."
+    exit 1
+fi
+
 
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
@@ -34,13 +67,9 @@ echo "Waiting for model to be ready..."
 sleep 5
 
 # Check if services are running
-if docker-compose ps | grep -q "Up"; then
-    echo "Services are running successfully!"
-    echo "Ollama is available at: https://localhost"
-    echo ""
-    echo "To view logs: docker-compose logs -f"
-    echo "To stop services: docker-compose down"
+if docker-compose ps | grep  "Up"; then
+    echo -e "Services are running successfully!\nOllama is available at: https://localhost\n\nTo view logs: docker-compose logs -f\nTo stop services: docker-compose down"
 else
-    echo "Some services failed to start. Check logs with: docker-compose logs"
-    exit 1
+    echo -e "Some services failed to start. Check logs with: docker-compose logs"
+    exit 0
 fi

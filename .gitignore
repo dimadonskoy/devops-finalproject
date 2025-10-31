@@ -1,6 +1,3 @@
-#Files
-.env
-
 #Directories
 .git/
 venv/
@@ -8,6 +5,7 @@ __pycache__/
 .venv/
 .terraform/
 ollama_data/
+
 # Terraform
 .terraform/
 *.tfstate
@@ -16,43 +14,7 @@ crash.log
 *.tfvars
 *.tfvars.json
 
-# Local env
-.env
-.env.*
-secrets.*
-.terraform/
-*.tfstate
-*.tfstate.*
-crash.log
-*.tfvars*
-.env*
-secrets.*
-.terraform/
-*.tfstate
-*.tfstate.*
-crash.log
-*.tfvars*
-.env*
-secrets.*
-.terraform.lock.hcl
-*.tfstate
-*.tfstate.*
-crash.log
-crash.*.log
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-terraform.rc
-terraform.tfvars
-terraform.tfvars.json
-*.tfplan
-*.tfbackup
-*.tfvars*
-*.hcl
-*.tf.json
-*.auto.tfvars
-*.auto.tfvars.json
+
 # Certificates / keys
 *.crt
 *.pem
