@@ -12,6 +12,8 @@ COPY app.py .
 
 COPY templates/ templates/
 
+COPY static/ static/
+
 EXPOSE 5001
 
 CMD ["gunicorn", "--workers", "2", "--bind", "0.0.0.0:5001", "app:app"]

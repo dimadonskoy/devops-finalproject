@@ -18,6 +18,9 @@ services:
   flask-local-ai:
     image: crooper/ai-model:latest
     container_name: flask-local-ai
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       - OLLAMA_MODEL=gemma:2b
