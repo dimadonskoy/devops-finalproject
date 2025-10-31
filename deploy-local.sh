@@ -36,7 +36,7 @@ sleep 5
 # Check if services are running
 if docker-compose ps | grep -q "Up"; then
     echo "Services are running successfully!"
-    echo "Ollama is available at: http://localhost"
+    echo "Ollama is available at: https://localhost"
     echo ""
     echo "To view logs: docker-compose logs -f"
     echo "To stop services: docker-compose down"
