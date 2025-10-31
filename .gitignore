@@ -59,3 +59,4 @@ terraform.tfvars.json
 *.key
 certs/
 ssl/
+.DS_Store
