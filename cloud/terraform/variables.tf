@@ -22,7 +22,7 @@ variable "machine" {
   })
   default = {
     gpu = { type = "Standard_NC4as_T4_v3" }
-    cpu = { type = "Standard_A2_v2" }
+    cpu = { type = "Standard_A4_v2" }
   }
 }
 
