@@ -42,7 +42,8 @@ A simple, self-hosted chatbot web application that runs on your local machine or
     This script will build the Docker images, start the services, and pull the default AI model (`gemma:2b`).
 
     ```bash
-    ./deploy-local.sh
+    sudo chmod +x deploy-local.sh
+    sudo ./deploy-local.sh
     ```
 
     It may take a few minutes for the model to be downloaded the first time.
