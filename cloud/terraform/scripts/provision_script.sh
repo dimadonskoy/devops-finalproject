@@ -29,7 +29,7 @@ run_sudo() {
 
 REPO_DIR="/opt/devops-finalproject"
 REPO_URL="https://github.com/dimadonskoy/devops-finalproject.git"
-REPO_BRANCH="clean-main"
+REPO_BRANCH="main"
 
 CLOUD_SCRIPTS_DIR="/var/lib/cloud/instance/scripts"
 
@@ -115,7 +115,7 @@ sleep 5
 if (run_sudo docker compose ps 2>/dev/null || run_sudo docker-compose ps) | grep -q "Up"; then
     echo "Services are running successfully!"
     PUBLIC_IP=$(curl -s ifconfig.me)
-    echo "Web Interface: http://$PUBLIC_IP:5001"
+    echo "Web Interface: https://$PUBLIC_IP"
     echo "Ollama API: http://$PUBLIC_IP:11434"
     echo "To view logs: sudo docker compose logs -f || sudo docker-compose logs -f"
     echo "To stop services: sudo docker compose down || sudo docker-compose down"
