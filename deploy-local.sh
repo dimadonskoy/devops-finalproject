@@ -10,27 +10,27 @@ set -o nounset
 set -o pipefail
 #######################################################################
 
-echo "🚀 Starting Local AI Chatbot deployment..."
+echo "Starting Local AI Chatbot deployment..."
 
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
-    echo "❌ Docker is not running. Please start Docker and try again."
+    echo "Docker is not running. Please start Docker and try again."
     exit 1
 fi
 
-echo "🧹 Cleaning up existing containers..."
+echo "Cleaning up existing containers..."
 docker-compose down -v
 
-echo "📦 Building and starting services..."
+echo "Building and starting services..."
 docker-compose up -d --build
 
-echo "⏳ Waiting for Ollama to be ready..."
+echo "Waiting for Ollama to be ready..."
 sleep 15
 
-echo "🤖 Pulling AI model (this may take a few minutes)..."
+echo "Pulling AI model (this may take a few minutes)..."
 docker exec ollama ollama pull "gemma:2b"
 
-echo "⏳ Waiting for model to be ready..."
+echo "Waiting for model to be ready..."
 sleep 5
 
 # Check if services are running
