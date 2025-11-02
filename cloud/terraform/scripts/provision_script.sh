@@ -23,7 +23,7 @@ REPO_BRANCH="main"
 echo "Starting Local AI Chatbot deployment..."
 
 # Create LOGS directory if  not exist
-if [ ! -d "/var/log/cloud-deploy" ]; then
+if [[ ! -d "/var/log/cloud-deploy" ]]; then
     echo "LOGS directory does not exist. Creating LOGS directory..."
     mkdir -p /var/log/cloud-deploy
 fi
@@ -52,7 +52,7 @@ fi
 
 
 # Function to run commands with sudo if not root
-if [ ! -d "$REPO_DIR/.git" ]; then
+if [[ ! -d "$REPO_DIR/.git" ]]; then
     echo "Cloning repository into $REPO_DIR"
     mkdir -p "$REPO_DIR"
     git clone -b "$REPO_BRANCH" "$REPO_URL" "$REPO_DIR"
